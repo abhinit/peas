@@ -12,7 +12,7 @@ spec:
         app: pea-norm
     spec:
       containers:
-      - name: pea-norm:v0
+      - name: peas:v0
         image: nginx:1.7.9
         ports:
         - containerPort: 80
