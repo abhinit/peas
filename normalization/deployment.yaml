@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pea-deployment
+spec:
+  replicas: 2
+  template:
+    metadata:
+      # unlike pod-nginx.yaml, the name is not included in the meta data as a unique name is
+      # generated from the deployment name
+      labels:
+        app: pea-norm
+    spec:
+      containers:
+      - name: pea-norm:v0
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
