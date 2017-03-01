@@ -6,13 +6,11 @@ spec:
   replicas: 2
   template:
     metadata:
-      # unlike pod-nginx.yaml, the name is not included in the meta data as a unique name is
-      # generated from the deployment name
       labels:
-        app: pea-norm
+        app: pea-normalization-dep
     spec:
       containers:
       - name: peas
-        image: peas:v0
+        image: normalization-pea:v1
         ports:
-        - containerPort: 80
+        - containerPort: 5000
