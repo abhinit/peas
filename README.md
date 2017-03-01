@@ -99,6 +99,19 @@ You can test the normalization pea using the following command:
  curl -H "Content-Type: application/json" -X POST -d "{\"array\":[1,2,5]}" <PEA ADDRESS>
 ```
 
+The response should look like:
+
+```Shell
+{
+  "result": [
+    0.0, 
+    0.25, 
+    1.0
+  ], 
+  "status": "ok"
+}
+
+```
 You can obtain the PEA ADDRESS as follows:
 
 ```Shell
