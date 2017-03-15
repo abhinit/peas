@@ -1,0 +1,66 @@
+from flask import Flask
+
+import pandas as pd
+
+import urllib2
+
+from taskflow import engines
+from taskflow.patterns import linear_flow
+from taskflow import task
+
+
+class FileReadTask(task.Task):
+
+    default_provides = 'file_read_result'
+
+    def execute(self):
+        with open('small.data') as f:
+            dataframe = pd.read_csv(f)
+            return dataframe.to_json()
+
+
+class StandardizationTask(task.Task):
+
+    default_provides = 'standardization_result'
+
+    def execute(self, standardization_input):
+
+        req = urllib2.Request('http://10.0.0.184:30583')
+        req.add_header('Content-Type', 'application/json')
+        req_data = '\"data\": \"' + standardization_input + '\"'
+        response = urllib2.urlopen(req, req_data)
+        return response["result"]
+
+
+class ClassificationTask(task.Task):
+    def execute(self, classification_input):
+        print("Executing '%s'" % (self.name))
+        print("Got input '%s'" % (a))
+
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def run():
+
+    wf = linear_flow.Flow("flow")
+    wf.add(FileReadTask(), StandardizationTask(rebind={'standardization_input': 'file_read_result'}))
+
+    e = engines.load(wf)
+
+    print("Compiling...")
+    e.compile()
+
+    print("Preparing...")
+    e.prepare()
+
+    print("Running...")
+    result = e.run()
+
+    print("Done...")
+    return result['standardization_result']
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True)
+    

@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: taskflow-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: taskflow-dep
+    spec:
+      containers:
+      - name: peas
+        image: taskflow:v1
+        ports:
+        - containerPort: 5000
