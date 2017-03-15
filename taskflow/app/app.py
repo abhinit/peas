@@ -42,7 +42,7 @@ app = Flask(__name__)
 
 
 @app.route("/")
-def run():
+def run_app():
 
     wf = linear_flow.Flow("flow")
     wf.add(FileReadTask(), StandardizationTask(rebind={'standardization_input': 'file_read_result'}))
