@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 import pandas as pd
 
 import urllib2
+import json
 
 from taskflow import engines
 from taskflow.patterns import linear_flow
@@ -29,12 +30,12 @@ class StandardizationTask(task.Task):
         print("in the standardisation task")
         req = urllib2.Request('http://192.168.99.100:30583')
         req.add_header('Content-Type', 'application/json')
-        req_data = jsonify({
-            "data": standardization_input
-        })
+        data = {}
+        data['data'] = standardization_input
+        json_data = json.dumps(data)
 
-        print(req_data)
-        response = urllib2.urlopen(req, req_data)
+        print json_data
+        response = urllib2.urlopen(req, json_data)
         print response
         # return req_data
         return response["result"]
