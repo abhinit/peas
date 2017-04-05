@@ -27,14 +27,14 @@ class StandardizationTask(task.Task):
 
     def execute(self, standardization_input):
         print("in the standardisation task")
-        # req = urllib2.Request('http://192.168.99.100:30583')
-        # req.add_header('Content-Type', 'application/json')
+        req = urllib2.Request('http://192.168.99.100:30583')
+        req.add_header('Content-Type', 'application/json')
         req_data = '\"data\": \"' + standardization_input + '\"'
 
         print(req_data)
-        return req_data
-        # response = urllib2.urlopen(req, req_data)
-        # return response["result"]
+        # return req_data
+        response = urllib2.urlopen(req, req_data)
+        return response["result"]
 
 
 class ClassificationTask(task.Task):
