@@ -32,9 +32,9 @@ class StandardizationTask(task.Task):
         req_data = '\"data\": \"' + standardization_input + '\"'
 
         print(req_data)
-        # return req_data
-        response = urllib2.urlopen(req, req_data)
-        return response["result"]
+        return req_data
+        # response = urllib2.urlopen(req, req_data)
+        # return response["result"]
 
 
 class ClassificationTask(task.Task):
