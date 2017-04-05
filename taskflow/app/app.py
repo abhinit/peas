@@ -35,6 +35,7 @@ class StandardizationTask(task.Task):
 
         print(req_data)
         response = urllib2.urlopen(req, req_data)
+        print response
         # return req_data
         return response["result"]
 
