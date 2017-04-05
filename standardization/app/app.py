@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST'])
 def run_normalization():
-    
+    print("am in normalization")
     json_content = request.get_json()
 
     if "data" not in json_content:
