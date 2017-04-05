@@ -25,7 +25,7 @@ class StandardizationTask(task.Task):
 
     def execute(self, standardization_input):
 
-        req = urllib2.Request('http://10.0.0.184:30583')
+        req = urllib2.Request('http://192.168.99.100:30583')
         req.add_header('Content-Type', 'application/json')
         req_data = '\"data\": \"' + standardization_input + '\"'
         response = urllib2.urlopen(req, req_data)
