@@ -27,11 +27,12 @@ class StandardizationTask(task.Task):
 
     def execute(self, standardization_input):
         print("in the standardisation task")
-        req = urllib2.Request('http://192.168.99.100:30583')
-        req.add_header('Content-Type', 'application/json')
+        # req = urllib2.Request('http://192.168.99.100:30583')
+        # req.add_header('Content-Type', 'application/json')
         req_data = '\"data\": \"' + standardization_input + '\"'
 
         print(req_data)
+        return req_data
         # response = urllib2.urlopen(req, req_data)
         # return response["result"]
 
@@ -66,7 +67,7 @@ def run_app():
     result = e.run()
 
     print("Done...")
-    return result['standardization_result']
+    return result
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
