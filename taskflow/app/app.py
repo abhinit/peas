@@ -67,7 +67,10 @@ def run_app():
     result = e.run()
 
     print("Done...")
-    return result
+    return jsonify({
+        "status": "ok",
+        "result": "test"
+    })
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
